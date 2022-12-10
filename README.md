@@ -2,8 +2,8 @@
 
 [Click para acceder a la web](https://todo-zantonz.vercel.app/)
 
-Autor: Anton Zyrianov
-Fecha: 25/08/2022
+Autor: Aldo Santa María
+Fecha: 09/12/2022
 
 ## Descripcion
 
@@ -24,20 +24,20 @@ __El objetivo__ de este proyecto es poner en practica los conocimientos de Vue.j
 
 ## Seguimiento del proyecto:
 
-### 18 agosto:
+### 05 diciembre:
 * Implentar HTML y CSS del Sign Up y Sing In
 
-### 19 agosto:
+### 06 diciembre:
 * Implentar la logica para el Sign Up, Sign In y Sing Out
 * Implentar los componentes del Navbar y el Footer
 * Empezar con el diseño HTML y CSS del componente addTask
 
-### 22 de agosto:
+### 07 de diciembre:
 * Implementar la funcionalidad de addTask y taskItem
 * Añadir el diseño HTML y CSS del componente taskItem
 * Hacer el fetch de las tareas de Supabase al cargar la pagina y cada vez que se ejecute alguna accion de cambio
 
-### 23 de agosto:
+### 08 de diciembre:
 * Preparar la tienda task.js para poder conectar los botones con la base de datos
 * Añadir funcionalidad al boton toggle que permite cambiar el estado de la tarea
 * Añadir funcionalidad al boton de cambiar el nombre que permite al usuario cambiar el titulo de la tarea
@@ -45,13 +45,13 @@ __El objetivo__ de este proyecto es poner en practica los conocimientos de Vue.j
 * Implemntar la funcionalidad de ocultar/mostrar contraseña a la hora de hacer Sign In
 * Adaptar el diseño a la version movil, en este caso solo hay solo media query que se activa a partir de 747px para abajo
 
-### 24 de agosto:
+### 09 de diciembre:
 * Implementar menu hamburguesa para versiones moviles
 * Cuando el usuario clique en el boton de toggle y cambie el estado de la tarea a "Hecha", esta se tacha
 * Subir el proyecto a Vercel para que este disponible para todo el mundo
 * Comenzar con la parte del perfil de usuario ~~(opcional)~~
 
-### 25 de agosto:
+### 10 de diciembre:
 * Repaso a la pagina y todas sus funcionalidades
 * Preparar el README con la descripcion del proyecto
 * Preparar la presentacion del proyecto
