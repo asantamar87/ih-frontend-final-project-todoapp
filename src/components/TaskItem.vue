@@ -1,0 +1,166 @@
+<template>
+
+  <div class="mt-6 mb-6">
+  <div class="block p-8 rounded-3xl shadow-lg bg-blue-100 max-w-sm ">
+ <div class="group h-full">
+  <div class="group relative h-full px-2  pb-1 bg-white rounded-md shadow-md hover:shadow-xl transition duration-200">
+    <div class="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 inline-flex h-16 w-16 items-center justify-center bg-white rounded-full transition duration-200">
+     
+     <div  :class="task.is_complete?'bg-green-600':'bg-red-400' "  class="inline-flex items-center justify-center w-12 h-12 text-white rounded-full p-3">
+       <svg   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
+        </path>
+      </svg>
+      </div>
+
+    </div>
+
+    
+  </div>
+ </div>
+      <!-- Print old title before edit -->
+    <h5 v-if="!toggle" class="text-gray-900 text-xl leading-tight font-medium mb-2 mt-10">{{ task.title }}</h5>
+    <!-- Recive a new value for title, show a old title on placeHolder-->
+    <input v-else type="text" name="" id="" :placeholder="task.title" v-model="newTitle" class="my-10" />
+    <!-- Print old description before edit -->
+    <p v-if="!toggle" class="text-gray-700 text-base mb-4">{{ task.description }}</p>
+    <!-- Recive a new value for description, show a old description on placeholder-->
+    <textarea v-if="toggle" name="" id="" cols="30" rows="6" :placeholder="task.description" v-model="newDescription"></textarea>
+    
+    <!-- SAVE CHANGES -->
+    <button  
+    v-if="toggle" 
+    @click="replaceButton(task.id)"
+    class="inline-block px-4 m-6  py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+    >Save changes
+  </button>
+
+  <button  
+  v-if="toggle" 
+  @click="toggle = false"
+  class="inline-block px-6 py-2.5 bg-rose-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-rose-700 hover:shadow-lg focus:bg-rose-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg transition duration-150 ease-in-out"
+  >Cancel
+</button>
+<!-- Add icono to replace completed -->
+
+    <!-- TASK COMPLETED -->
+    <button 
+    :class="task.is_complete ? 'noToggle': 'showToggle'" 
+    v-if="!toggle" @click="toggleTask(task.id,!task.is_complete)" 
+    type="button" 
+    class=" inline-block m-1 px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-m  active:bg-black-800 active:shadow-lg transition duration-150 ease-in-out"
+    > {{ task.is_complete ? "completed" : "complete" }} 
+    </button>
+
+  <!-- TASK EDIT -->
+    <button  
+    v-if="!toggle" 
+    @click="showInp"
+    type="button" 
+    class=" inline-block m-1 px-6 py-2.5 bg-yellow-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out"
+    >Edit</button>
+
+    <!-- TASK DELETE -->
+    <button  
+    @click="deleteTask(task.id)" 
+    v-if="!toggle"
+    type="button" class=" inline-block m-1 px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
+    >Delete</button>
+  </div>
+</div>
+</template>
+<script setup>
+import { ref } from 'vue';
+import { useTaskStore } from '../stores/task';
+import { supabase } from '../supabase';
+// const taskStore = useTaskStore();
+
+const emit = defineEmits(["getTasks"])
+
+const toggle = ref(false);
+
+const showInp = () => {
+  toggle.value = true;
+
+  // emit("getTasks")
+}
+
+
+
+const newTitle = ref("");
+const newDescription = ref("");
+
+// Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
+const deleteTask = async(id) => {
+    // await taskStore.deleteTask(props.task.id);
+    await useTaskStore().deleteTask(id);
+  // await useTaskStore().fetchTasks();
+  emit("getTasks")
+  alert("Tarea eliminada con exito");
+};
+
+const toggleTask = async(id,bool) => {
+  await useTaskStore().toggleTask(id,bool);
+  await useTaskStore().fetchTasks();
+  emit("getTasks")
+  alert("Tarea completada con exito");
+}
+
+const replaceButton = async (id) => {
+  await useTaskStore().editTask(newTitle.value, newDescription.value, id);
+  await useTaskStore().fetchTasks();
+  
+  toggle.value = !toggle.value;
+  emit("getTasks")
+
+};
+
+const props = defineProps({
+    task: Object
+});
+
+</script>
+
+<style></style>
+
+<!--
+**Hints**
+1. ref() or reactive() can be used here to store the following, think if you want to store them either individually or
+like an object, up to you.
+
+2. Data properties need here are the following: a boolean to store a false**Important variable, a string to store an error,
+a string to store the value of the task that the user can edit, an initial false boolean to hide the inputFIeld used to edit
+the new task detail or details[this is in reference of the task title and the task description].
+
+3. Store the custom emit events that will be used to call the functions of the homeView for editing, deleting and toggling the
+status[completed, not complted] of the taskItem.
+
+4. Function to handle the error with the data properties used to control the error and the the boolean controlling the boolean
+empty variable.
+
+5. Function to handle the edit dialogue where the inputField is displayed and the string used to store the value of the
+inputField will be used here to save the value as a prop on this function.
+
+6. Function to emmit a custom event emit() that takes 2 parameters a name for the custom event and the value that will be
+send via the prop to the parent component. This function can control the toggle completion of the task on the homeview.
+
+7. Function to edit the task information that you decided that the user can edit. This function's body takes in a conditional
+that first checks if the value of the task [either title and description or just title] is empty which if true it runs the
+function used to handle the error on hint4. Else, the conditional sets the first mentioned boolean data property on hint2
+back to its inital boolean value to hide the error message and repeat the same for the data property mentioned 4th on hint2;
+a constant that stores an object that holds the oldValue from the prop item and the value of the task coming from the data
+property mentioned 3rd on hint2; a custom event emit() that takes 2 parameters a name for the custom event and the value
+from the object used on this part of the conditional and lastly this part of the conditional sets the value of input field
+to an empty string to clear it from the ui.
+
+8. Function to emmit a custom event emit() that takes 2 parameters a name for the custom event and the value that will be
+send via the prop to the parent component. This function can control the removal of  the task on the homeview.
+-->
+
+<!-- <div class="container">
+    <h3 >{{task.title}}</h3>
+    <button @click="deleteTask">Delete {{task.title}}</button>
+</div> -->
+
+
+
