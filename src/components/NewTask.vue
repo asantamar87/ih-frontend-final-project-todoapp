@@ -15,17 +15,53 @@
     </div> -->
 
 
-    <section class="py-10 bg-gray-100" >
+    
+    
+    <!-- <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button> -->
+
+
+<!-- PERFECTA -->
+<section class="py-2 bg-blue-100 " >
+    <div class="my-12 p-10 max-w-4xl mx-auto text-center animate__animated animate__fadeIn  ">
+        <span class="inline-block py-px px-2 mb-4 text-xs leading-5 text-blue-500 bg-blue-300 font-medium rounded-full shadow-sm">TASK</span>
+        <h2 class="mb-4 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task </h2>
+        <div class="text-lg md:text-xl  text-coolGray-500 font-medium my-4">
+            <p class="add-task-text">
+              Keep your life organized, prepare for a trip ? Start here
+            </p>
+            <p class="text-center mx-3">Today's Date is {{date}}</p>
+        </div>
+        <div class="mb-6">
+            <div class="flex flex-col px-4">
+                <input class="inputField mb-4" placeholder="Add a Task Title - Listen to Kendrick Lamar" type="text"
+                    name="newTodo" id="name">
+                <input class="inputField mb-4"
+                    placeholder="Adda a Task Decription - Look up Kendrick Lamar's FEAR album on spotify and listen to the whole album."
+                    type="text" name="newDescription" id="description">
+
+                <button @click="addTask" class="inline-block py-2 px-4text-sm leading-5 text-blue-50 bg-blue-800 hover:bg-blue-700 font-medium focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50 rounded-md">Add</button>
+            </div>
+
+        </div>
+    </div>
+
+
+</section>
+ 
+    <!-- <hr/> -->
+
+
+    <!-- <section class="py-10 bg-gray-100 " >
         <div class="container px-4 mx-auto">
             <div class="max-w-4xl mx-auto text-center animate__animated animate__fadeIn">
-                <div class="add-task-description">
-                    <h2 class="mb-16 mx-10 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task </h2>
+                <h2 class="mb-4 my-10 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task </h2>
+                <div class="text-lg md:text-xl text-coolGray-500 font-medium my-4">
                     <p class="add-task-text">
                       Keep your life organized, prepare for a trip ? Start here
                     </p>
-                    <p class="add-task-text">Today's Date is {{date}}</p>
+                    <p class="text-center mx-3">Today's Date is {{date}}</p>
                   </div>
-                <div class="flex justify-center ">
+                <div class="flex justify-center">
                     <div class="rounded-lg shadow-lg bg-white w-full">
                         <div class="max-w-xl mx-auto text-center animate__animated animate__fadeIn">
                             <span class="inline-block p-4 text-xs leading-5 text-blue-500 bg-blue-100 font-medium rounded-full shadow-sm">
@@ -39,7 +75,6 @@
                                 <div v-if="showErrorMessage">
                                     <p class="error-text">{{ errorMessage }}</p>
                                 </div>
-                                <!-- <div class="flex flex-col px-4"> -->
                                    
                                     <div class="flex flex-col px-2 w-full">
                                         <input class="inputField  mx-4 my-4" placeholder="Add a Task Title." type="text"
@@ -52,7 +87,10 @@
                                         cols="300" rows="10" 
                                         v-model="description">
                                 
-                                    <button @click="addTask" class="inline-block py-2 px-4 text- leading-5 text-blue-50 bg-blue-800 hover:bg-blue-700 font-medium focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50 rounded-md">Add</button>
+                                    <button @click="addTask" 
+                                    class="inline-block py-2 px-4 text- leading-5 text-blue-50 bg-blue-800 hover:bg-blue-700 font-medium focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50 rounded-md">
+                                    Add
+                                    </button>
                                 </div>
                             </div>
 
@@ -65,30 +103,7 @@
             </div>
         
         
-    </section> 
-    
-    <!-- <button type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">Button</button> -->
-
-
-<!-- PERFECTA -->
-
-    <!-- <div class="max-w-4xl mx-auto text-center animate__animated animate__fadeIn">
-        <span class="inline-block py-px px-2 mb-4 text-xs leading-5 text-blue-500 bg-blue-100 font-medium rounded-full shadow-sm">TASK</span>
-        <h2 class="mb-4 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task </h2>
-        <div class="mb-6">
-            <div class="flex flex-col px-4">
-                <input class="inputField mb-4" placeholder="Add a Task Title - Listen to Kendrick Lamar" type="text"
-                    name="newTodo" id="name">
-                <input class="inputField mb-4"
-                    placeholder="Adda a Task Decription - Look up Kendrick Lamar's FEAR album on spotify and listen to the whole album."
-                    type="text" name="newDescription" id="description">
-
-                <button @click="addTask" class="inline-block py-2 px-4text-sm leading-5 text-blue-50 bg-blue-800 hover:bg-blue-700 font-medium focus:ring-2 focus:ring-blue-800 focus:ring-opacity-50 rounded-md">Add</button>
-            </div>
-
-        </div>
-    </div> -->
-
+    </section>  -->
 
     <!-- WETAG -->
     <!-- <div class="backgroundNewTask m-auto mt-20 w-3/6 py-10 px-10">

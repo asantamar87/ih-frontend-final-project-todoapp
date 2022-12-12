@@ -1,7 +1,7 @@
 <template>
 
-  <div class="mx-8 pt-4 my-8  ">
-  <div class="block p-10 rounded-3xl shadow-lg bg-blue-100" >
+  <div class="m-8 pt-2   ">
+  <div class="block p-10  rounded-3xl shadow-lg bg-blue-100" >
  <div class="group h-full mt-4">
   <div class="group relative h-full px-2  pb-1 bg-white rounded-md shadow-md hover:shadow-xl transition duration-200">
     <div class="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 inline-flex h-16 w-16 items-center justify-center bg-white rounded-full transition duration-200">

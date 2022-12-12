@@ -1,6 +1,6 @@
 <template>
   <Nav />
-  <div class="container px-10">
+  <div class="container px-1">
   </div>
   <Footer />
 </template>
