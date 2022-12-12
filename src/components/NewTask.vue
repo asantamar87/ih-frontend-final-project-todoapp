@@ -18,7 +18,13 @@
     <section class="py-10 bg-gray-100" >
         <div class="container px-4 mx-auto">
             <div class="max-w-4xl mx-auto text-center animate__animated animate__fadeIn">
-                <h2 class="mb-16 mx-10 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task </h2>
+                <div class="add-task-description">
+                    <h2 class="mb-16 mx-10 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task </h2>
+                    <p class="add-task-text">
+                      Keep your life organized, prepare for a trip ? Start here
+                    </p>
+                    <p class="add-task-text">Today's Date is {{date}}</p>
+                  </div>
                 <div class="flex justify-center ">
                     <div class="rounded-lg shadow-lg bg-white w-full">
                         <div class="max-w-xl mx-auto text-center animate__animated animate__fadeIn">
@@ -141,12 +147,18 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
 
-
+//importamos libreria moment.js que previamente habiamos instalado con npm install moment --save
+import moment from "moment";
+//guardamos en una varibale la funcion predeterminada por moment y lo mostramos en el html con el sintaxis bigotes
+const date = moment().format("ll");
+console.log(date);
 
 
 // variables para los valors de los inputs
 const name = ref('');
 const description = ref('');
+
+
 
 // constant to save a variable that holds an initial false boolean value for the errorMessage container that is conditionally displayed depending if the input field is empty
 const showErrorMessage = ref(false);

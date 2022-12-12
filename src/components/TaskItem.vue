@@ -1,16 +1,13 @@
 <template>
 
-  <div class="mt-6 mb-6">
-  <div class="block p-8 rounded-3xl shadow-lg bg-blue-100 max-w-sm ">
- <div class="group h-full">
+  <div class="mx-8 pt-4 my-8  ">
+  <div class="block p-10 rounded-3xl shadow-lg bg-blue-100" >
+ <div class="group h-full mt-4">
   <div class="group relative h-full px-2  pb-1 bg-white rounded-md shadow-md hover:shadow-xl transition duration-200">
     <div class="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 inline-flex h-16 w-16 items-center justify-center bg-white rounded-full transition duration-200">
      
      <div  :class="task.is_complete?'bg-green-600':'bg-red-400' "  class="inline-flex items-center justify-center w-12 h-12 text-white rounded-full p-3">
-       <svg   xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z">
-        </path>
-      </svg>
+      <font-awesome-icon icon="fa-solid fa-clipboard-check" />
       </div>
 
     </div>
@@ -45,12 +42,14 @@
 
     <!-- TASK COMPLETED -->
     <button 
-    :class="task.is_complete ? 'noToggle': 'showToggle'" 
+    :class="task.is_complete ? 'noToggle': 'showToggle  && bg-black-200 text-gray-400 border-red-600'" 
     v-if="!toggle" @click="toggleTask(task.id,!task.is_complete)" 
     type="button" 
-    class=" inline-block m-1 px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-m  active:bg-black-800 active:shadow-lg transition duration-150 ease-in-out"
-    > {{ task.is_complete ? "completed" : "complete" }} 
-    </button>
+    class=" inline-block m-1 px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-m hover:bg-green-400 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-600 active:shadow-lg transition duration-150 ease-in-out"
+    > {{ task.is_complete ? '' : "" }} 
+   <!-- <font-awesome-icon icon="fa-solid fa-check" /> -->
+   <font-awesome-icon icon="fa-solid fa-check" />
+  </button>
 
   <!-- TASK EDIT -->
     <button  
@@ -58,14 +57,19 @@
     @click="showInp"
     type="button" 
     class=" inline-block m-1 px-6 py-2.5 bg-yellow-400 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-yellow-700 hover:shadow-lg focus:bg-yellow-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-yellow-800 active:shadow-lg transition duration-150 ease-in-out"
-    >Edit</button>
+    >
+    <!-- <font-awesome-icon icon="fa-regular fa-trash-can" /> -->
+    <font-awesome-icon icon="fa-solid fa-pen-to-square" /></button>
 
     <!-- TASK DELETE -->
     <button  
     @click="deleteTask(task.id)" 
     v-if="!toggle"
     type="button" class=" inline-block m-1 px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
-    >Delete</button>
+    >
+<font-awesome-icon icon="fa-solid fa-trash-can" />
+  
+  </button>
   </div>
 </div>
 </template>
@@ -103,7 +107,7 @@ const toggleTask = async(id,bool) => {
   await useTaskStore().toggleTask(id,bool);
   await useTaskStore().fetchTasks();
   emit("getTasks")
-  alert("Tarea completada con exito");
+  // alert("Tarea completada con exito");
 }
 
 const replaceButton = async (id) => {

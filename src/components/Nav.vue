@@ -76,16 +76,25 @@ window.addEventListener("load", () =>{
         </button>
       </div>
     </div>
-    <nav :class="isOpen ? 'block' : 'hidden'" class="flex justify-between p-6 px-4">
+    <nav :class="isOpen ? 'block' : 'hidden'" class="flex justify-between p-3 px-4">
       <!-- <a href="#" class="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">Home</a> -->
-      <router-link to="/" class=" w-full block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">Home</router-link>
+      <router-link to="/" class=" w-full block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">
+        <!-- Home -->
+        <font-awesome-icon icon="fa-solid fa-house" />
+      </router-link>
 
       <!-- <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Profile</a> -->
-      <router-link to="/account" class=" w-full block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">Account</router-link>
+      <router-link to="/account" class=" w-full block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">
+        <!-- Account -->
+        <font-awesome-icon icon="fa-solid fa-user-pen" />
+    </router-link>
 
-      <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Messages</a> 
+      <!-- <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Messages</a>  -->
 
-      <button @click="signOut" class="block px-2 py-1 text-white font-semibold rounded hover:bg-red-800"> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M109.3 288L480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 73.4-73.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-128 128c-12.5 12.5-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288z"/></svg> </button>
+      <button @click="signOut" type="button" class="block px-2 py-1 text-white font-semibold rounded hover:bg-blue-400"> 
+        <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
+
+      </button>
 
       <!-- <button @click="signOut" type="button" class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">
         

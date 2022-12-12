@@ -7,6 +7,9 @@ import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
 import TaskItem from '../components/TaskItem.vue';
 
+
+
+
 const taskStore = useTaskStore();
 // const toogle = ref(false)
 
@@ -27,11 +30,17 @@ getTasks();
 </script>
 
 <template>
-  <div class="wrapper">
+
+  <div class="wrapper dark:bg-slate-800">
     <Nav />
+
+
     <div class="content"> 
+ 
       <!-- <h3>Your account:</h3> -->
       <!-- <router-link to="/account">Account</router-link> -->
+
+
     </div>
     <NewTask @taskToAdd="getTasks"/>
     <!-- <h1>Tasks:</h1> -->
@@ -40,6 +49,7 @@ getTasks();
       <TaskItem v-for="task in tasks" :key="task.id" :task="task" @getTasks="getTasks"  />
 
     </div>
+
     
   </div>
   <Footer />

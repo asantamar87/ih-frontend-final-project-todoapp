@@ -1,19 +1,15 @@
 <template>
-  <div class="container">
-
-
+  <div class="container px-8">
     <header>
       <div class=" right-0 bottom-0 left-0 w-full  bg-fixed">
         <div class="flex justify-center items-center h-3/2">
           <div class="text-center text-blue-600 px-6 md:px-12 mt-5">
-            <h1 class="text-6xl font-bold mt-0 mb-2">ToDo App</h1>
+            <h1 class="text-6xl font-bold mt-0 mb-2">Task App</h1>
             <h3 class="text-3l font-bold mb-6">Start organizing your tasks!</h3>
           </div>
         </div>
       </div>
     </header>
-
-
     <section class="h-screen">
       <div class="px-12 h-full text-gray-800 ">
         <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap  g-6">

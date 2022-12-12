@@ -1,8 +1,10 @@
 <template>
   <Nav />
-  <Profile />
+  <div class="container px-10">
+  </div>
   <Footer />
 </template>
+
 
 <script setup>
   import { supabase } from '../supabase'
