@@ -36,7 +36,7 @@
             <div class="flex flex-row items-center justify-center lg:justify-start">
               <p class="text-lg mb-0 mr-4">Sign in with</p>
 
-              <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+              <button  aria-label="Github" type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
                 class="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
                 <!-- Github -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512" class="w-4 h-4">
@@ -46,7 +46,7 @@
                 </svg>
               </button>
 
-              <button type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
+              <button aria-label="Facebook" type="button" data-mdb-ripple="true" data-mdb-ripple-color="light"
                 class="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
                 <!-- Facebook -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" class="w-4 h-4">
@@ -56,7 +56,7 @@
                 </svg>
               </button>
 
-              <button type="submit" data-mdb-ripple="true" data-mdb-ripple-color="light"
+              <button  aria-label="Twitter" type="submit" data-mdb-ripple="true" data-mdb-ripple-color="light"
                 class="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
                 <!-- Twitter -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4">
@@ -106,7 +106,9 @@
             </div>
 
             <div class="text-center lg:text-left flex justify-center items-center flex-col">
-              <button type="submit"
+              <button
+              aria-label="Need Account"
+              type="submit"
                 class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                 Login
               </button>
