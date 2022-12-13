@@ -72,11 +72,6 @@ window.addEventListener("load", () =>{
       </div>
 
     <!-- RIGHT ELEMENTS -->
-    <!-- hidden -->
-      <!-- <div class=" lg:block lg:w-1/3">
-        
-        <div class=" flex items-center justify-end"> -->
-  
           <div class="sm:hidden ">
             <button @click="(isOpen = !isOpen)" type="button"
               class="block text-gray-500 hover:text-white focus:text-white focus:outline-none">
@@ -92,7 +87,6 @@ window.addEventListener("load", () =>{
 
       <!-- Nav Bar mobile extended -->
           <nav :class="isOpen ? 'block' : 'hidden '" class="flex justify-end  p-5 w-full ">
-            <!-- <a href="#" class="block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800">Home</a> -->
             <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{ name[0] }}</h1>
            
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">
@@ -100,7 +94,6 @@ window.addEventListener("load", () =>{
               <font-awesome-icon icon="fa-solid fa-house" />
             </router-link>
           
-            <!-- <a href="#" class="mt-1 block px-2 py-1 text-white font-semibold rounded hover:bg-gray-800 sm:mt-0 sm:ml-2">Profile</a> -->
             <router-link to="/account" class="block mr-4 text-white font-semibold rounded hover:bg-gray-800">
               <!-- Account -->
               <font-awesome-icon icon="fa-solid fa-user-pen" />

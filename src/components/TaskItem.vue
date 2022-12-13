@@ -1,7 +1,7 @@
 <template>
 
-  <div class="m-8 pt-2   ">
-  <div class="block p-10  rounded-3xl shadow-lg bg-blue-100" >
+  <div class="m-4 pt-2   ">
+  <div class="block p-6  rounded-3xl shadow-lg bg-blue-100" >
  <div class="group h-full mt-4">
   <div class="group relative h-full px-2  pb-1 bg-white rounded-md shadow-md hover:shadow-xl transition duration-200">
     <div class="absolute top-0 left-1/2 transform -translate-y-1/2 -translate-x-1/2 inline-flex h-16 w-16 items-center justify-center bg-white rounded-full transition duration-200">
@@ -15,28 +15,32 @@
     
   </div>
  </div>
-      <!-- Print old title before edit -->
-    <h5 v-if="!toggle" class="text-gray-900 text-xl leading-tight font-medium mb-2 mt-10">{{ task.title }}</h5>
-    <!-- Recive a new value for title, show a old title on placeHolder-->
-    <input v-else type="text" name="" id="" :placeholder="task.title" v-model="newTitle" class="my-10" />
-    <!-- Print old description before edit -->
-    <p v-if="!toggle" class="text-gray-700 text-base mb-4">{{ task.description }}</p>
-    <!-- Recive a new value for description, show a old description on placeholder-->
-    <textarea v-if="toggle" name="" id="" cols="30" rows="6" :placeholder="task.description" v-model="newDescription"></textarea>
+
+  <div class="flex flex-col">
+   <!-- Print old title before edit -->
+   <h5 v-if="!toggle" class="text-gray-900 text-xl leading-tight font-medium mb-2 mt-8">{{ task.title }}</h5>
+   <!-- Recive a new value for title, show a old title on placeHolder-->
+   <input v-else type="text" name="" id="" :placeholder="task.title" v-model="newTitle" class="my-10" />
+   <!-- Print old description before edit -->
+   <p v-if="!toggle" class="text-gray-700 text-base mb-4">{{ task.description }}</p>
+   <!-- Recive a new value for description, show a old description on placeholder-->
+   <textarea v-if="toggle" name="" id="" cols="20" rows="6" :placeholder="task.description" v-model="newDescription"></textarea>
+   
+  </div>
     
     <!-- SAVE CHANGES -->
     <button  
     v-if="toggle" 
     @click="replaceButton(task.id)"
     class="inline-block px-4 m-6  py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-    >Save changes
+    ><font-awesome-icon icon="fa-solid fa-floppy-disk" />
   </button>
 
   <button  
   v-if="toggle" 
   @click="toggle = false"
   class="inline-block px-6 py-2.5 bg-rose-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-rose-700 hover:shadow-lg focus:bg-rose-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg transition duration-150 ease-in-out"
-  >Cancel
+  ><font-awesome-icon icon="fa-solid fa-xmark" />
 </button>
 <!-- Add icono to replace completed -->
 
