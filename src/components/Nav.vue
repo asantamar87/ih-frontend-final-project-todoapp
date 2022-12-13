@@ -73,7 +73,7 @@ window.addEventListener("load", () =>{
 
     <!-- RIGHT ELEMENTS -->
           <div class="sm:hidden ">
-            <button @click="(isOpen = !isOpen)" type="button"
+            <button aria-label="Hamburguer button" @click="(isOpen = !isOpen)" type="button"
               class="block text-gray-500 hover:text-white focus:text-white focus:outline-none">
               <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
                 <path v-if="isOpen" fill-rule="evenodd"
@@ -98,7 +98,7 @@ window.addEventListener("load", () =>{
               <!-- Account -->
               <font-awesome-icon icon="fa-solid fa-user-pen" />
             </router-link>
-            <button @click="signOut" type="button" class="block mr-4 text-white font-semibold rounded hover:bg-blue-400">
+            <button aria-label="Sign out" @click="signOut" type="button" class="block mr-4 text-white font-semibold rounded hover:bg-blue-400">
               <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
             </button>
           

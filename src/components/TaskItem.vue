@@ -30,13 +30,15 @@
     
     <!-- SAVE CHANGES -->
     <button  
+    aria-label="Save changes"
     v-if="toggle" 
     @click="replaceButton(task.id)"
-    class="inline-block px-4 m-6  py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+    class="inline-block px-6 m-10  py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
     ><font-awesome-icon icon="fa-solid fa-floppy-disk" />
   </button>
 
   <button  
+  aria-label="Cancel edit"
   v-if="toggle" 
   @click="toggle = false"
   class="inline-block px-6 py-2.5 bg-rose-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-rose-700 hover:shadow-lg focus:bg-rose-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-rose-800 active:shadow-lg transition duration-150 ease-in-out"
@@ -46,6 +48,7 @@
 
     <!-- TASK COMPLETED -->
     <button 
+    aria-label="Task completed"
     :class="task.is_complete ? 'noToggle': 'showToggle  && bg-black-200 text-gray-400 border-red-600'" 
     v-if="!toggle" @click="toggleTask(task.id,!task.is_complete)" 
     type="button" 
@@ -57,6 +60,7 @@
 
   <!-- TASK EDIT -->
     <button  
+    aria-label="Task edit"
     v-if="!toggle" 
     @click="showInp"
     type="button" 
@@ -67,6 +71,7 @@
 
     <!-- TASK DELETE -->
     <button  
+    aria-label="Task deleted"
     @click="deleteTask(task.id)" 
     v-if="!toggle"
     type="button" class=" inline-block m-1 px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-red-700 hover:shadow-lg focus:bg-red-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-red-800 active:shadow-lg transition duration-150 ease-in-out"
