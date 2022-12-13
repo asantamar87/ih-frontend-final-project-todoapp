@@ -1,13 +1,4 @@
-<!-- COMPONENTE BOILERPLATE -->
- 
 <template>
-
-  <!-- <div class="container ">
-    <h3 class="header-title text-3xl font-bold underline ">Log In to ToDo App</h3>
-    <p class="header-subtitle">ALDOOOO Estamos en la ruta de login. Aquí deberíais crear un form con la lógica correspondiente para que este permita al usuario loguearse con su email y su contraseña. Miraros la lógica de SignUp si necesitáis inspiración :)</p>
-    <p>Dont have an account? <PersonalRouter :route="route" :buttonText="buttonText" class="sign-up-link"/></p>
-  </div> -->
-
 
 <div class="container px-8">
     
@@ -127,13 +118,12 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 import PersonalRouter from "./PersonalRouter.vue";
 import { useRouter } from 'vue-router';
 
 import { useUserStore } from "../stores/user";
-import { storeToRefs } from "pinia";
 
 
 // Route Variables
@@ -171,7 +161,6 @@ const signIn = async () => {
       }, 5000);
    }
    return;
-  //  errorMsg.value = "error"
 };
 
 
