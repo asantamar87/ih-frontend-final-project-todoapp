@@ -1,6 +1,6 @@
 <template>
 
-<div class=" bg-blue-200 ">
+<div class="m-6">
   <header>
     <div class="bg-fixed">
       <div class="flex justify-center items-center">
@@ -12,7 +12,7 @@
     </div>
   </header>
 <!-- h-full -->
-  <section class="bg-slate-400 p-8 md:h-screen">
+  <section class="p-8 md:h-screen">
     <!-- px-6 h-full -->
     <div class=" text-gray-800 ">
       <div class="p-4  flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
