@@ -1,6 +1,6 @@
 <template>
 <section class="py-2 bg-blue-100 ">
-    <div class="my-12 p-10 max-w-4xl mx-auto text-center animate__animated animate__fadeIn  ">
+    <div class="my-6 p-10 max-w-4xl mx-auto text-center animate__animated animate__fadeIn  ">
         <span
             class="inline-block py-px px-2 mb-4 text-xs leading-5 text-blue-500 bg-blue-300 font-medium rounded-full shadow-sm">TASK</span>
         <h2 class="mb-4 text-4xl md:text-5xl leading-tight text-coolGray-900 font-bold tracking-tighter"> Add a new Task
