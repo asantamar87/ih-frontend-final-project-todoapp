@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useTaskStore } from "../stores/task";
 import { supabase } from "../supabase/";
+
 import Nav from '../components/Nav.vue';
 import Footer from '../components/Footer.vue';
 import NewTask from '../components/NewTask.vue';
@@ -34,21 +35,20 @@ getTasks();
   <div class="wrapper dark:bg-slate-800">
     <Nav />
 
-
-    <div class="content"> 
- 
+    <!-- content w-full -->
+    <!-- m-6 -->
+    <div class=""> 
       <!-- <h3>Your account:</h3> -->
       <!-- <router-link to="/account">Account</router-link> -->
+      <NewTask @taskToAdd="getTasks"/>
+      <!-- <h1>Tasks:</h1> -->
 
-
+      <!--  w-full  -->
+      <div class="flex flex-wrap justify-around">
+        <TaskItem v-for="task in tasks" :key="task.id" :task="task" @getTasks="getTasks"  />
+      </div>
     </div>
-    <NewTask @taskToAdd="getTasks"/>
-    <!-- <h1>Tasks:</h1> -->
-    <div class="flex flex-wrap justify-around ">
-
-      <TaskItem v-for="task in tasks" :key="task.id" :task="task" @getTasks="getTasks"  />
-
-    </div>
+  
 
     
   </div>

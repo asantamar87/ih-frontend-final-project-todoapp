@@ -1,23 +1,26 @@
 <template>
 
-<div class="container px-8">
-    
+<div class=" bg-blue-200 ">
   <header>
-    <div class=" right-0 bottom-0 left-0 w-full  bg-fixed">
-      <div class="flex justify-center items-center h-3/2">
-        <div class="text-center text-blue-600 px-6 md:px-12 mt-5">
+    <div class="bg-fixed">
+      <div class="flex justify-center items-center">
+        <div class="text-center text-blue-600 px-6 md:px-12 sm:px-12 mt-5">
           <h1 class="text-6xl font-bold mt-0 mb-2">Task App</h1>
           <h3 class="text-3l font-bold mb-6">Start organizing your tasks!</h3>
         </div>
       </div>
     </div>
   </header>
-
-  <section class="h-screen">
-    <div class="px-6 h-full text-gray-800 ">
-      <div class="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
-        <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-0">
-          <img src="../assets/logo.png" class="w-full" alt="Sample image" />
+<!-- h-full -->
+  <section class="bg-slate-400 p-8 md:h-screen">
+    <!-- px-6 h-full -->
+    <div class=" text-gray-800 ">
+      <div class="p-4  flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
+        <div class="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-5/12 lg:w-6/12 md:w-6/12 mb-12 md:mb-0">
+          <img 
+          src="../assets/logo.png" 
+          class="w-full" 
+          alt="Task image" />
         </div>
         <div class="xl:ml-20 xl:w-5/12 lg:w-5/12 md:w-8/12 mb-12 md:mb-0">
 
@@ -93,7 +96,8 @@
                   id="exampleCheck2" />
                 <label class="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label>
               </div>
-              <a href="#!" class="text-gray-800">Forgot password?</a>
+              <!-- LINK TO RECOVERY PASSWORD -->
+              <PersonalRouter :route="route1" :buttonText="buttonRecovery" class=" text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out"/>
             </div>
 
             <div class="text-center lg:text-left flex justify-center items-center flex-col">
@@ -128,7 +132,9 @@ import { useUserStore } from "../stores/user";
 
 // Route Variables
 const route = "/auth/signup";
+const route1 = "/auth/resetpass";
 const buttonText = "Sign Up";
+const buttonRecovery = "Forgot Passowrd?";
 
 // Input Fields
 const email = ref("");

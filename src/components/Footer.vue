@@ -1,7 +1,9 @@
 <template>
-    <footer class="text-center text-white" style="background-color: #f1f1f1;">
+
+
+    <footer class="text-center text-white bg-gray-300 " >
         <div class="container pt-9">
-          <div class="flex justify-center mb-9">
+          <div class="flex justify-center mb-10 ml-20">
             <a href="#!" class="mr-9 text-gray-800">
               <svg
                 aria-hidden="true"
@@ -107,9 +109,9 @@
           </div>
         </div>
       
-        <div class="text-center text-gray-700 p-4" style="background-color: rgba(0, 0, 0, 0.2);">
+        <div class="text-center text-gray-200 p-4 bg-blue-800 ">
           © 2022 Copyright:
-          <a class="text-gray-800" href="https://github.com/asantamar87">Task App by Aldo Santa María</a>
+          <a class="text-gray-400" href="https://github.com/asantamar87">   Task App by Aldo Santa María</a>
         </div>
       </footer>
   </template>

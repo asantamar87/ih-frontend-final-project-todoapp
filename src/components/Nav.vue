@@ -72,7 +72,7 @@ window.addEventListener("load", () =>{
       </div>
 
     <!-- RIGHT ELEMENTS -->
-          <div class="sm:hidden ">
+          <div class="block sm:hidden ">
             <button aria-label="Hamburguer button" @click="(isOpen = !isOpen)" type="button"
               class="block text-gray-500 hover:text-white focus:text-white focus:outline-none">
               <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
