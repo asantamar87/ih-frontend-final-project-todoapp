@@ -143,7 +143,6 @@ const user = useUserStore();
 
 // Arrow function to Signin user to supaBase
 const signIn = async () => {
-  console.log("patata");
   try {
     await user.signIn(email.value, password.value)
     if (!user.value) {
