@@ -18,10 +18,24 @@ const getUser = useUserStore().user;
 // constant that calls user email from the useUSerStore
 const userEmail = getUser.email;
 
-const name = userEmail.split("@")
+const username = ref("");
+
+
+const setup = async () => {
+  await user.fetchUser();
+  username.value = user.profile.username;
+console.log(username.value);
+
+}
+
+setup();
+
+// const name = userEmail.split("@")
 
 // async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
 const redirect = useRouter();
+
+
 
 const signOut = async () => {
   console.log("estoy aqui");
@@ -85,8 +99,8 @@ window.addEventListener("load", () =>{
         </div>
 
       <!-- Nav Bar mobile extended -->
-          <nav :class="isOpen? 'block' : 'sm:hidden '" class="flex justify-end  p-5 w-full  ">
-            <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{ name[0] }}</h1>
+          <nav :class="isOpen? 'block' : 'hidden '" class="flex justify-end  p-5 w-full  ">
+            <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{username}}</h1>
            
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">
               <!-- Home -->

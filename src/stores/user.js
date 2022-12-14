@@ -4,7 +4,9 @@ import { supabase } from "../supabase";
 export const useUserStore = defineStore("user", {
   state: () => ({
     user: null,
-    profile: null
+    profile: null,
+    usernamme:null,
+    fullname:null
   }),
   actions: {
     async fetchUser() {
@@ -13,12 +15,12 @@ export const useUserStore = defineStore("user", {
         this.user = user;
         const { data: profile } = await supabase
         .from('profiles')
-        .select()
-        .match({ user_id: this.user.id })
+        .select('*')
+        .match({ id: this.user.id })
 
         if (profile) this.profile = profile[0];
-        console.log('user in store: ', this.user);
-        console.log('profile in store: ', this.profile);
+        //console.log('user in store: ', this.user);
+        //console.log('profile in store: ', this.profile);
       }
     },
 
@@ -86,6 +88,22 @@ export const useUserStore = defineStore("user", {
         }
       })
       console.log(data);
+    },
+
+    //THIS FUNCTION UPDATE THE USERNAME IN THE PROFILES TABLE FROM SUABASE
+    async updateUser(username,fullname,avatar_url,website) {
+      //console.log(useUserStore().user.id);
+      const { data, error } = await supabase
+        .from("profiles")
+        .update([
+          {
+            username: username,
+            fullname: fullname,
+            avatar_url:avatar_url,
+            website:website,
+          },
+        ])
+        .match({ id: useUserStore().user.id });
     },
     
   //   async resetPassword  (accessToken, newPassword) {
