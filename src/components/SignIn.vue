@@ -126,7 +126,6 @@ import { ref } from "vue";
 
 import PersonalRouter from "./PersonalRouter.vue";
 import { useRouter } from 'vue-router';
-
 import { useUserStore } from "../stores/user";
 
 
@@ -135,6 +134,8 @@ const route = "/auth/signup";
 const route1 = "/auth/resetpass";
 const buttonText = "Sign Up";
 const buttonRecovery = "Forgot Passowrd?";
+
+
 
 // Input Fields
 const email = ref("");
@@ -147,6 +148,7 @@ const errorMsg = ref("");
 const redirect = useRouter();
 const user = useUserStore();
 
+
 // Arrow function to Signin user to supaBase
 const signIn = async () => {
   try {
@@ -154,7 +156,11 @@ const signIn = async () => {
     if (!user.value) {
       email.value = '';
       password.value = '';
+
+
       redirect.push({ path: '/' });
+
+      console.log("Estás logueado");
     } else {
       redirect.push({ path: '/auth/login' });
     }

@@ -36,7 +36,7 @@ const signOut = async () => {
   }
 };
 
-const isOpen = ref(false)
+const isOpen = ref(true)
 
 window.addEventListener("resize",() => { 
   if(window.innerWidth > 640){
@@ -55,7 +55,6 @@ window.addEventListener("load", () =>{
 </script>
 
 <template>
-  
 
   <header class="bg-gray-900  sm:flex sm:justify-between sm:items-center sm:px-4 sm:py-4">
     <div class="flex justify-between items-center w-full px-4 py-3 sm:p-0 ">
@@ -72,7 +71,7 @@ window.addEventListener("load", () =>{
       </div>
 
     <!-- RIGHT ELEMENTS -->
-          <div class="block sm:hidden ">
+          <div class="sm:hidden ">
             <button aria-label="Hamburguer button" @click="(isOpen = !isOpen)" type="button"
               class="block text-gray-500 hover:text-white focus:text-white focus:outline-none">
               <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
@@ -86,7 +85,7 @@ window.addEventListener("load", () =>{
         </div>
 
       <!-- Nav Bar mobile extended -->
-          <nav :class="isOpen ? 'block' : 'hidden '" class="flex justify-end  p-5 w-full ">
+          <nav :class="isOpen? 'block' : 'hidden '" class="flex justify-end  p-5 w-full  ">
             <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{ name[0] }}</h1>
            
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">

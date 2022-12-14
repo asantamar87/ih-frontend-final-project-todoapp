@@ -1,53 +1,6 @@
-<script setup>
-
-import { ref } from "vue";
-import PersonalRouter from "./PersonalRouter.vue";
-import { useRouter } from 'vue-router';
-import {useUserStore} from "../stores/user"
-
-
-
-const route = "/auth/login";
-const buttonText = "Sign in";
-
-const redirect = useRouter();
-
-// const user = almacenAuth()
-const email = ref('')
-
-
-const resetPassword = () =>{
-  useUserStore().passwordRecovery(email.value);
-  console.log(email.value);
-}
-
-
-</script>
-
 <template>
 
-<!-- ////////// Actualizar Contraseña ////////// -->
-  <!-- <main class="w-full sm:w-1/2 xl:w-1/3">
-    <div class="border-teal p-8 border-t-12 mb-6 rounded-lg shadow-lg bg-white">
-      <div class="mb-4">
-        <label class="font-bold text-grey-darker block mb-2">Contraseña</label>
-        <input
-          type="password"
-          class="block appearance-none w-full bg-white border border-grey-light hover:border-grey px-2 py-2 rounded shadow"
-          placeholder="Tú contraseña"
-          v-model="(password)"
-        />
-      </div>
-
-      <div class="flex flex-col gap-2">
-        <a @click="user.handleUpdateUser({password: password})" href="#" class="btn btn-accent" tabindex="0">
-          Actualizar contraseña
-        </a>
-      </div>
-    </div>
-  </main> -->
-
-  
+    
 <div class="m-6">
     <header>
       <div class="bg-fixed">
@@ -74,7 +27,7 @@ const resetPassword = () =>{
   
           <!-- FORM SIGN IN  -->
             
-            <form @submit.prevent="resetPassword" class="form-sign-in">
+            <form @submit.prevent="updateUser" class="form-sign-in">
               <div class="flex flex-row items-center justify-center lg:justify-start">
                 <p class=" text-3l font-bold mb-6">Reset your password</p>
               </div>
@@ -91,7 +44,7 @@ const resetPassword = () =>{
               </div>
   
               <!-- Password input -->
-              <!-- <div class="mb-6">
+              <div class="mb-6">
                 <label class="input-field-label">Password</label>
                 <input type="password"
                   class="form-control block w-full px-4 py-2 text-xl font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
@@ -99,7 +52,7 @@ const resetPassword = () =>{
                   v-model="password"
                   required />
               </div>
-   -->
+   
 
               <!-- BUtton Recovery -->
               <div class="text-center lg:text-left flex justify-center items-center flex-col">
@@ -120,6 +73,32 @@ const resetPassword = () =>{
         </div>
       </div>
     </section>
-  
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import PersonalRouter from "./PersonalRouter.vue";
+import { useRouter } from 'vue-router';
+import {useUserStore} from "../stores/user"
+
+
+
+const route = "/auth/login";
+const buttonText = "Sign in";
+
+const redirect = useRouter();
+
+// const user = almacenAuth()
+const email = ref('');
+const password = ref('');
+
+
+const updateUser = () => {
+  useUserStore().updatePassword(email.value, password.value);
+    console.log("UPDATE USER");
+}
+
+   // Actualiza la contraseña del usuario
+
+</script>

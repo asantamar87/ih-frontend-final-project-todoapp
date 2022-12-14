@@ -66,6 +66,37 @@ export const useUserStore = defineStore("user", {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
     },
+
+    async passwordRecovery (email){
+      await supabase.auth.api.resetPasswordForEmail(email);
+      console.log("Hola Pepsicola");
+    },
+
+    async updatePassword(mail, pass) {
+      console.log("UPDATE PASSWORD");
+
+      const {
+        data,
+        error
+      } = await supabase.auth.api.updateUser({
+        email: mail,
+        password: pass,
+        data: {
+          hello: 'world'
+        }
+      })
+      console.log(data);
+    },
+    
+  //   async resetPassword  (accessToken, newPassword) {
+  //     const {user, error} = await supabase.auth.api.updateUser(
+  //       accessToken, 
+  //       {password: newPassword}
+  //   )
+  //   if (error) throw error
+  //   return user
+    
+  // },
   },
 
   persist: {
