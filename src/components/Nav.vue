@@ -85,7 +85,7 @@ window.addEventListener("load", () =>{
         </div>
 
       <!-- Nav Bar mobile extended -->
-          <nav :class="isOpen? 'block' : 'hidden '" class="flex justify-end  p-5 w-full  ">
+          <nav :class="isOpen? 'block' : 'sm:hidden '" class="flex justify-end  p-5 w-full  ">
             <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{ name[0] }}</h1>
            
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">
