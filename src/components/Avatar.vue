@@ -6,97 +6,83 @@ import { useUserStore } from '../stores/user';
 const userStore = useUserStore();
 const users = ref([])
 
-const prop = defineProps(['path', 'size'])
-const { path, size } = toRefs(prop)
+const prop = defineProps(['path', 'size', 'fullname', 'website'])
+// ADD FULLNAME, WEBSITE OPTIONAL
+const { path, size  } = toRefs(prop)
 const emit = defineEmits(['upload', 'update:path'])
 const uploading = ref(false)
 const src = ref('')
 const files = ref()
 
 
-const avatar = ref("");
-const fullname = ref("");
-const website = ref("");
 
 
-const setup = async () => {
-  await userStore.fetchUser();
-//   avatar.value = userStore.profile.avatar_url;
- fullname.value = userStore.profile.fullname;
-  website.value = userStore.profile.website;
-
+const downloadImage = async () => {
+  console.log("Estoy dimg");  
+  try {
+        const { data, error } = await supabase.storage
+            .from('avatars')
+            .download(path.value)
+        if (error) throw error
+        src.value = URL.createObjectURL(data)
+        
+    } catch (error) {
+        console.error('Error downloading image: ', error.message)
+    }
 }
 
-setup();
 
-// const downloadImage = async () => {
-//     try {
-//         const { data, error } = await supabase.storage
-//             .from('avatars')
-//             .download(path.value)
-//         if (error) throw error
-//         src.value = URL.createObjectURL(data)
-//     } catch (error) {
-//         console.error('Error downloading image: ', error.message)
-//     }
-// }
+const uploadAvatar = async (evt) => {
+    files.value = evt.target.files
+    try {
+        uploading.value = true
+        if (!files.value || files.value.length === 0) {
+            throw new Error('You must select an image to upload.')
+        }
+        const file = files.value[0]
+        const fileExt = file.name.split('.').pop()
+        const filePath = `${Math.random()}.${fileExt}`
+        let { error: uploadError } = await supabase.storage
+            .from('avatars')
+            .upload(filePath, file)
+        if (uploadError) throw uploadError
+        emit('update:path', filePath)
+        //emit('upload')
+    } catch (error) {
+        alert(error.message)
+    } finally {
+        uploading.value = false
+    }
+}
 
-
-// const uploadAvatar = async (evt) => {
-//     files.value = evt.target.files
-//     try {
-//         uploading.value = true
-//         if (!files.value || files.value.length === 0) {
-//             throw new Error('You must select an image to upload.')
-//         }
-//         const file = files.value[0]
-//         const fileExt = file.name.split('.').pop()
-//         const filePath = `${Math.random()}.${fileExt}`
-//         let { error: uploadError } = await supabase.storage
-//             .from('avatars')
-//             .upload(filePath, file)
-//         if (uploadError) throw uploadError
-//         emit('update:path', filePath)
-//         emit('upload')
-//     } catch (error) {
-//         alert(error.message)
-//     } finally {
-//         uploading.value = false
-//     }
-// }
-// watch(path, () => {
-//     if (path.value) downloadImage()
-// })
+watch(path, () => {
+    if (path.value) downloadImage()
+    console.log('estoy en el watcher')
+})
 
 
 
 </script>
 
 <template>
-    <div>
-        <img v-if="src" :src="src" alt="Avatar" class="rounded-full w-32 mb-4 mx-auto"
-            :style="{ height: size + 'em', width: size + 'em' }" />
-        <div v-else class="avatar no-image" :style="{ height: size + 'em', width: size + 'em' }" />
-
-        <div :style="{ width: size + 'em' }">
-            <label class="button primary block" for="single">
-                {{ uploading ? "Uploading ..." : "Upload" }}
-            </label>
-            <input style="hidden absolute" type="file" id="single" accept="image/*"
-                @change="uploadAvatar" :disabled="uploading" />
-        </div>
-    </div>
-
-    <!-- <p>DEBAJO DE ESTO</p> -->
 
 <div class="text-center">
-        <img
-          :src="avatar"
-          class="rounded-full w-32 mb-4 mx-auto"
-          alt="Avatar-ALT"
-        />
-        <h5 class="text-xl font-medium leading-tight mb-2">{{fullname}}</h5>
-        <p class="text-gray-500">{{website}}</p>
-      </div>
+  <img v-if="src" :src="src" alt="Avatar" class="rounded-full w-1/3 mb-4 mx-auto"/>
+  
+  <div >
+    <label class="button primary block" for="single">
+        {{ uploading ? "Uploading ..." : "Upload" }}
+    </label>
+    <input class="text-sm" style="hidden absolute" type="file" id="single" accept="image/*"
+        @change="uploadAvatar" :disabled="uploading" />
+</div>
+<div class="my-6">
+  <h5 class="text-3xl font-medium leading-tight mb-2">{{fullname}}</h5>
+  <p class="text-gray-500">{{website}}</p>
+
+</div>
+
+</div>
+
 </template>
   

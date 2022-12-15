@@ -1,14 +1,12 @@
 <script setup>
 import { supabase } from '../supabase'
-import { onMounted, ref, toRefs } from 'vue'
+import { onMounted, ref, toRefs, computed} from 'vue'
 
 import { useUserStore } from '../stores/user';
-
 
 import Nav from '../components/Nav.vue';
 import Avatar from '../components/Avatar.vue';
 import Footer from '../components/Footer.vue';
-// ES6 Modules or TypeScript
 import Swal from 'sweetalert2'
 
 const userStore = useUserStore();
@@ -20,29 +18,49 @@ const fullname = ref("");
 const avatar_url = ref("");
 const website = ref("");
 
-const isOpen = ref(false)
+const name = computed(() => {
+  if(userStore.profile) return userStore.profile.fullname});
+
+
+const  getProfile =  async() => {
+  try {
+    
+    await userStore.fetchUser()
+    const profile = userStore.profile
+    console.log(profile);
+    username.value = profile.username
+    fullname.value = profile.fullname
+    website.value = profile.website
+    avatar_url.value = profile.avatar_url
+
+  } catch (error) {
+    alert(error.message)
+  }
+
+  }
+
+  getProfile();
 
 const updateProfile = async () =>{
   users.value = await userStore.updateUser(username.value, fullname.value, avatar_url.value,website.value)
-  isOpen.value = true;
   Swal.fire('Guardado','Datos actualizados correctamente','success')
-
   console.log("Datos actualizados correctamente");
+  await userStore.fetchUser()
+  // getProfile();
 }
 
 const props = defineProps({
     user: Object
 });
 
-const setup = async () => {
-  await userStore.fetchUser();
-  username.value = userStore.profile.username;
-  fullname.value = userStore.profile.fullname;
-  website.value = userStore.profile.website;
+// const setup = async () => {
+//   await userStore.fetchUser();
+//   username.value = userStore.profile.username;
+//   fullname.value = userStore.profile.fullname;
+//   website.value = userStore.profile.website;
+// }
 
-}
-
-setup();
+// setup();
 </script>
 
 <template>
@@ -55,7 +73,8 @@ setup();
         <form  @submit.prevent="updateProfile">
           <div class="form-group mb-6">
             <!-- <Avatar size="30" /> -->
-            <Avatar v-model:path="avatar_url" @upload="" size="15" />  
+            <Avatar v-model:path="avatar_url" :fullname="name" :website="website" @upload="updateProfile" size="10" />
+            <!-- <Avatar v-model:path="avatar_url" @upload="" size="15" />   -->
           </div>
 
             <!-- PROFILE - Username -->
@@ -104,6 +123,7 @@ setup();
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     type="text"
               :placeholder="fullname"
+              
                v-model="fullname" 
               required
               />
@@ -157,19 +177,10 @@ setup();
               Submit
             </button>
 
-
-            <!-- <div :class="isOpen? 'block' : 'hidden' " class="p-4 my-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-              <span class="font-medium">Success updated!</span> 
-            </div> -->
-         
       </form>
     <!-- FORM END -->
       </div>
-    
     </div>  
-    
-    
-    
     <Footer />
   </div>
 </template>

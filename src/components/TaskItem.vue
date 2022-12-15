@@ -93,7 +93,7 @@ const showInp = () => {
 const newTitle = ref("");
 const newDescription = ref("");
 
-// Función para borrar la tarea a través de la store. El problema que tendremos aquí (y en NewTask.vue) es que cuando modifiquemos la base de datos los cambios no se verán reflejados en el v-for de Home.vue porque no estamos modificando la variable tasks guardada en Home. Usad el emit para cambiar esto y evitar ningún page refresh.
+// Función para borrar la tarea a través de la store.
 const deleteTask = async (id) => {
   const { isConfirmed } = await Swal.fire({
     title: '¿Está seguro?',
@@ -108,17 +108,10 @@ const deleteTask = async (id) => {
       allowOutsideClick: false
     })
     Swal.showLoading()
-    // await this.deleteEntry( this.entry.id )
-    // this.$router.push({ name: 'no-entry' })
     await useTaskStore().deleteTask(id);
     emit("getTasks")
-
-
     Swal.fire('Eliminado', '', 'success')
   }
-  // await taskStore.deleteTask(props.task.id);
-  // await useTaskStore().fetchTasks();
-  // alert("Tarea eliminada con exito");
 };
 
 const toggleTask = async(id,bool) => {

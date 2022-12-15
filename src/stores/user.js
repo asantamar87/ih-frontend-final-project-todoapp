@@ -92,7 +92,6 @@ export const useUserStore = defineStore("user", {
 
     //THIS FUNCTION UPDATE THE USERNAME IN THE PROFILES TABLE FROM SUABASE
     async updateUser(username,fullname,avatar_url,website) {
-      //console.log(useUserStore().user.id);
       const { data, error } = await supabase
         .from("profiles")
         .update([

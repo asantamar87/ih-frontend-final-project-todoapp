@@ -3,7 +3,7 @@ import PersonalRouter from "./PersonalRouter.vue";
 import { useUserStore } from "../stores/user";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
-import { ref } from 'vue';
+import { ref, onMounted} from 'vue';
 
 //constant to save a variable that will hold the use router method
 const route = "/";
@@ -14,8 +14,9 @@ const buttonText = "Todo app";
 const user = useUserStore();
 
 // constant to save a variable that will get the user from store with a computed function imported from vue
-// const getUser = computed(() => useUserStore().user);
-const getUser = useUserStore().user;
+const getUser = computed(() => {
+  if(user.profile) return useUserStore().profile.username});
+// const getUser = useUserStore().user;
 
 // constant that calls user email from the useUSerStore
 const userEmail = getUser.email;
@@ -26,19 +27,14 @@ const username = ref("");
 const setup = async () => {
   await user.fetchUser();
   username.value = user.profile.username;
-  
   console.log(username.value);
-
 }
 
 setup();
 
-// const name = userEmail.split("@")
 
 // async function that calls the signOut method from the useUserStore and pushes the user back to the Auth view.
 const redirect = useRouter();
-
-
 
 const signOut = async () => {
   console.log("estoy aqui");
@@ -53,7 +49,7 @@ const signOut = async () => {
   }
 };
 
-const isOpen = ref(true)
+const isOpen = ref(false)
 
 window.addEventListener("resize",() => { 
   if(window.innerWidth > 640){
@@ -62,11 +58,19 @@ window.addEventListener("resize",() => {
     }
 })
 
-window.addEventListener("load", () =>{
+// window.addEventListener("load", () =>{
+//   if(window.innerWidth > 640){
+//     isOpen.value = true} else{
+//       isOpen.value = false
+//     }
+// })
+
+onMounted(() => {
   if(window.innerWidth > 640){
     isOpen.value = true} else{
       isOpen.value = false
     }
+  
 })
 
 </script>
@@ -103,7 +107,7 @@ window.addEventListener("load", () =>{
 
       <!-- Nav Bar mobile extended -->
           <nav :class="isOpen? 'block' : 'hidden '" class="flex justify-end  p-5 w-full  ">
-            <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{username}}</h1>
+            <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{getUser}}</h1>
            
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">
               <!-- Home -->
