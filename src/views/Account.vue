@@ -8,6 +8,8 @@ import { useUserStore } from '../stores/user';
 import Nav from '../components/Nav.vue';
 import Avatar from '../components/Avatar.vue';
 import Footer from '../components/Footer.vue';
+// ES6 Modules or TypeScript
+import Swal from 'sweetalert2'
 
 const userStore = useUserStore();
 const users = ref([])
@@ -18,9 +20,13 @@ const fullname = ref("");
 const avatar_url = ref("");
 const website = ref("");
 
+const isOpen = ref(false)
 
 const updateProfile = async () =>{
   users.value = await userStore.updateUser(username.value, fullname.value, avatar_url.value,website.value)
+  isOpen.value = true;
+  Swal.fire('Guardado','Datos actualizados correctamente','success')
+
   console.log("Datos actualizados correctamente");
 }
 
@@ -31,6 +37,9 @@ const props = defineProps({
 const setup = async () => {
   await userStore.fetchUser();
   username.value = userStore.profile.username;
+  fullname.value = userStore.profile.fullname;
+  website.value = userStore.profile.website;
+
 }
 
 setup();
@@ -38,16 +47,15 @@ setup();
 
 <template>
   <div class= "bg-blue-200">
-
     <Nav />
     <div class="flex justify-center my-10 ">
-      <div class="block p-4 rounded-lg shadow-lg bg-white">
+      <div class="block p-10 rounded-lg shadow-lg bg-blue-400 ">
 
         <!-- FORM START -->
-        <form  @submit.prevent="updateProfile"  class="">
+        <form  @submit.prevent="updateProfile">
           <div class="form-group mb-6">
             <!-- <Avatar size="30" /> -->
-            <Avatar v-model:path="avatar_url" @upload="" size="15" /> 
+            <Avatar v-model:path="avatar_url" @upload="" size="15" />  
           </div>
 
             <!-- PROFILE - Username -->
@@ -61,7 +69,7 @@ setup();
                     py-1.5
                     text-base
                     font-normal
-                    text-gray-700
+                    text-gray-400
                     bg-white bg-clip-padding
                     border border-solid border-gray-300
                     rounded
@@ -86,7 +94,7 @@ setup();
                     py-1.5
                     text-base
                     font-normal
-                    text-gray-700
+                    text-gray-400
                     bg-white bg-clip-padding
                     border border-solid border-gray-300
                     rounded
@@ -95,7 +103,7 @@ setup();
                     m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     type="text"
-              placeholder="Enter full name"
+              :placeholder="fullname"
                v-model="fullname" 
               required
               />
@@ -112,7 +120,7 @@ setup();
           py-1.5
           text-base
           font-normal
-          text-gray-700
+          text-gray-400
           bg-white bg-clip-padding
           border border-solid border-gray-300
           rounded
@@ -148,12 +156,17 @@ setup();
               ease-in-out">
               Submit
             </button>
+
+
+            <!-- <div :class="isOpen? 'block' : 'hidden' " class="p-4 my-4 text-sm text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+              <span class="font-medium">Success updated!</span> 
+            </div> -->
          
       </form>
     <!-- FORM END -->
       </div>
     
-    </div>
+    </div>  
     
     
     

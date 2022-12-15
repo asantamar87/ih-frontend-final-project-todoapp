@@ -52,7 +52,7 @@
 
               <button  aria-label="Twitter" type="submit" data-mdb-ripple="true" data-mdb-ripple-color="light"
                 class="inline-block p-3 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded-full shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out mx-1">
-                <!-- Twitter -->
+                <!-- Google -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4 h-4">
                   <!--! Font Awesome Pro 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
                   <path fill="currentColor"
@@ -172,6 +172,38 @@ const signIn = async () => {
       }, 5000);
    }
    return;
+};
+
+//funcion para hacer el signIn con plataformas externas google/github
+const signInGoogle = async () => {
+  try {
+    //llamamos la tienda user y enviamos informacion al backend para hacer logIn
+    await useUserStore().loginWithGoogle();
+    //redirect a la home view
+    // setTimeout(redirect.push({ path: "/" }), 5000);
+  } catch (error) {
+    //mostramos mensaje del error
+    errorMsg.value = `Error: ${error.message}`;
+    //ocultamos el error a los 5 segundos
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 5000);
+  }
+};
+const signInGithub = async () => {
+  try {
+    //llamamos la tienda user y enviamos informacion al backend para hacer logIn
+    await useUserStore().loginWithGithub();
+    //redirect a la home view
+    // setTimeout(redirect.push({ path: "/" }), 5000);
+  } catch (error) {
+    //mostramos mensaje del error
+    errorMsg.value = `Error: ${error.message}`;
+    //ocultamos el error a los 5 segundos
+    setTimeout(() => {
+      errorMsg.value = null;
+    }, 5000);
+  }
 };
 
 

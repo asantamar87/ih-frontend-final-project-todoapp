@@ -4,6 +4,8 @@ import { supabase } from '../supabase'
 import { useUserStore } from '../stores/user';
 
 const userStore = useUserStore();
+const users = ref([])
+
 const prop = defineProps(['path', 'size'])
 const { path, size } = toRefs(prop)
 const emit = defineEmits(['upload', 'update:path'])
@@ -13,54 +15,59 @@ const files = ref()
 
 
 const avatar = ref("");
-const fullnamme = ref("");
+const fullname = ref("");
+const website = ref("");
+
 
 const setup = async () => {
   await userStore.fetchUser();
-  avatar.value = userStore.profile.avatar_url;
-  fullnamme.value = userStore.profile.fullnamme;
+//   avatar.value = userStore.profile.avatar_url;
+ fullname.value = userStore.profile.fullname;
+  website.value = userStore.profile.website;
+
 }
 
 setup();
 
-const downloadImage = async () => {
-    try {
-        const { data, error } = await supabase.storage
-            .from('avatars')
-            .download(path.value)
-        if (error) throw error
-        src.value = URL.createObjectURL(data)
-    } catch (error) {
-        console.error('Error downloading image: ', error.message)
-    }
-}
-const uploadAvatar = async (evt) => {
-    files.value = evt.target.files
-    try {
-        uploading.value = true
-        if (!files.value || files.value.length === 0) {
-            throw new Error('You must select an image to upload.')
-        }
-        const file = files.value[0]
-        const fileExt = file.name.split('.').pop()
-        const filePath = `${Math.random()}.${fileExt}`
-        let { error: uploadError } = await supabase.storage
-            .from('avatars')
-            .upload(filePath, file)
-        if (uploadError) throw uploadError
-        emit('update:path', filePath)
-        emit('upload')
-    } catch (error) {
-        alert(error.message)
-    } finally {
-        uploading.value = false
-    }
-}
-watch(path, () => {
-    if (path.value) downloadImage()
-})
+// const downloadImage = async () => {
+//     try {
+//         const { data, error } = await supabase.storage
+//             .from('avatars')
+//             .download(path.value)
+//         if (error) throw error
+//         src.value = URL.createObjectURL(data)
+//     } catch (error) {
+//         console.error('Error downloading image: ', error.message)
+//     }
+// }
 
-/*=====================*/
+
+// const uploadAvatar = async (evt) => {
+//     files.value = evt.target.files
+//     try {
+//         uploading.value = true
+//         if (!files.value || files.value.length === 0) {
+//             throw new Error('You must select an image to upload.')
+//         }
+//         const file = files.value[0]
+//         const fileExt = file.name.split('.').pop()
+//         const filePath = `${Math.random()}.${fileExt}`
+//         let { error: uploadError } = await supabase.storage
+//             .from('avatars')
+//             .upload(filePath, file)
+//         if (uploadError) throw uploadError
+//         emit('update:path', filePath)
+//         emit('upload')
+//     } catch (error) {
+//         alert(error.message)
+//     } finally {
+//         uploading.value = false
+//     }
+// }
+// watch(path, () => {
+//     if (path.value) downloadImage()
+// })
+
 
 
 </script>
@@ -80,15 +87,16 @@ watch(path, () => {
         </div>
     </div>
 
-    <p>DEBAJO DE ESTO</p>
+    <!-- <p>DEBAJO DE ESTO</p> -->
+
 <div class="text-center">
         <img
           :src="avatar"
           class="rounded-full w-32 mb-4 mx-auto"
           alt="Avatar-ALT"
         />
-        <h5 class="text-xl font-medium leading-tight mb-2">{{avatar}}</h5>
-        <p class="text-gray-500">Web developer</p>
+        <h5 class="text-xl font-medium leading-tight mb-2">{{fullname}}</h5>
+        <p class="text-gray-500">{{website}}</p>
       </div>
 </template>
   

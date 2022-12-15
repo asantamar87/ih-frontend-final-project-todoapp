@@ -9,6 +9,8 @@ import { ref } from 'vue';
 const route = "/";
 const buttonText = "Todo app";
 
+
+
 const user = useUserStore();
 
 // constant to save a variable that will get the user from store with a computed function imported from vue
@@ -24,7 +26,8 @@ const username = ref("");
 const setup = async () => {
   await user.fetchUser();
   username.value = user.profile.username;
-console.log(username.value);
+  
+  console.log(username.value);
 
 }
 
