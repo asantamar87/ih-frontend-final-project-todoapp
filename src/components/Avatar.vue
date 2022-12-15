@@ -7,7 +7,6 @@ const userStore = useUserStore();
 const users = ref([])
 
 const prop = defineProps(['path', 'size', 'fullname', 'website'])
-// ADD FULLNAME, WEBSITE OPTIONAL
 const { path, size  } = toRefs(prop)
 const emit = defineEmits(['upload', 'update:path'])
 const uploading = ref(false)
@@ -67,7 +66,7 @@ watch(path, () => {
 <template>
 
 <div class="text-center">
-  <img v-if="src" :src="src" alt="Avatar" class="rounded-full w-1/3 mb-4 mx-auto"/>
+  <img v-if="src" :src="src" alt="Avatar" class="mb-4 mx-auto p-1 w-40 h-40 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"/>
   
   <div >
     <label class="button primary block" for="single">

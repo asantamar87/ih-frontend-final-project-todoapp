@@ -17,13 +17,8 @@ const routes = [
       { path: "resetpass", component: PasswordReset },
       { path: "update", component: UpdateUser}
     ],
-    // beforeEnter: (to, from) => {
-      
-    //   return false
-    // },
   },
   { path: "/", component: Home },
-  // { path: 'login', name: 'login', component: () => import('pages/Login.vue') },
   { path: "/account", component: Account }
 ];
 
