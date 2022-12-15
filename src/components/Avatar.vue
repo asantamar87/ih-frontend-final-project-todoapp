@@ -1,5 +1,5 @@
 <script setup>
-import { ref, toRefs, watch } from 'vue'
+import { ref, toRefs, watch, computed } from 'vue'
 import { supabase } from '../supabase'
 import { useUserStore } from '../stores/user';
 
@@ -13,11 +13,8 @@ const uploading = ref(false)
 const src = ref('')
 const files = ref()
 
-
-
-
 const downloadImage = async () => {
-  console.log("Estoy dimg");  
+//   console.log("Estoy dimg");  
   try {
         const { data, error } = await supabase.storage
             .from('avatars')
@@ -28,6 +25,8 @@ const downloadImage = async () => {
     } catch (error) {
         console.error('Error downloading image: ', error.message)
     }
+
+
 }
 
 
@@ -56,7 +55,6 @@ const uploadAvatar = async (evt) => {
 
 watch(path, () => {
     if (path.value) downloadImage()
-    console.log('estoy en el watcher')
 })
 
 

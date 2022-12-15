@@ -107,7 +107,7 @@ const props = defineProps({
     <button aria-label="Task completed"
       :class="task.is_complete ? 'noToggle' : 'showToggle  && bg-black-200 text-gray-400 border-red-600'" v-if="!toggle"
       @click="toggleTask(task.id, !task.is_complete)" type="button"
-      class=" inline-block m-1 px-6 py-2.5 bg-green-300 text-white font-medium text-xs leading-tight uppercase rounded shadow-m hover:bg-green-400 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-600 active:shadow-lg transition duration-150 ease-in-out">
+      class=" inline-block m-1 px-6 py-2.5 bg-green-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-m hover:bg-green-600 hover:shadow-lg focus:bg-green-600 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-green-00 active:shadow-lg transition duration-150 ease-in-out">
       {{ task.is_complete ? "" : "" }}
       <!-- <font-awesome-icon icon="fa-solid fa-check" /> -->
       <font-awesome-icon icon="fa-solid fa-check" />

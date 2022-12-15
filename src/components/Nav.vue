@@ -4,30 +4,30 @@ import { useUserStore } from "../stores/user";
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { ref, onMounted} from 'vue';
-
-//constant to save a variable that will hold the use router method
-const route = "/";
-const buttonText = "Todo app";
+import Avatar from '../components/Avatar.vue';
 
 
-
-const user = useUserStore();
+ const user = useUserStore();
 
 // constant to save a variable that will get the user from store with a computed function imported from vue
 const getUser = computed(() => {
   if(user.profile) return useUserStore().profile.username});
-// const getUser = useUserStore().user;
+
+const getAvatar = computed(() => {
+  if(user.profile) return useUserStore().profile.avatar_url});
+
 
 // constant that calls user email from the useUSerStore
-const userEmail = getUser.email;
 
 const username = ref("");
+const avatar_url = ref ("")
 
 
 const setup = async () => {
   await user.fetchUser();
   username.value = user.profile.username;
-  console.log(username.value);
+  avatar_url.value = user.profile.avatar_url;
+  // console.log(avatar_url.value);
 }
 
 setup();
@@ -58,12 +58,11 @@ window.addEventListener("resize",() => {
     }
 })
 
-// window.addEventListener("load", () =>{
-//   if(window.innerWidth > 640){
-//     isOpen.value = true} else{
-//       isOpen.value = false
-//     }
-// })
+
+const props = defineProps({
+    user: Object
+});
+
 
 onMounted(() => {
   if(window.innerWidth > 640){
@@ -74,6 +73,7 @@ onMounted(() => {
 })
 
 </script>
+
 
 <template>
 
@@ -107,8 +107,9 @@ onMounted(() => {
 
       <!-- Nav Bar mobile extended -->
           <nav :class="isOpen? 'block' : 'hidden '" class="flex justify-end  p-5 w-full  ">
+            
             <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{getUser}}</h1>
-           
+            
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">
               <!-- Home -->
               <font-awesome-icon icon="fa-solid fa-house" />
