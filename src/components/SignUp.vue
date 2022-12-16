@@ -78,59 +78,6 @@
 
   </div>
 
-  <!-- <a href="#!"
-                    class="text-red-600 hover:text-red-700 focus:text-red-700 transition duration-200 ease-in-out">Register</a> -->
-
-
-  <!-- <form @submit.prevent="signUp" class="form-sign-in">
-      <div class="form">
-        <div class="form-input">
-          <label class="input-field-label">E-mail</label>
-          <input
-            type="email"
-            class="input-field"
-            placeholder="example@gmail.com"
-            id="email"
-            v-model="email"
-            required
-          />
-        </div>
-        <div class="form-input">
-          <label class="input-field-label">Password</label>
-          <input
-            type="password"
-            class="input-field"
-            placeholder="**********"
-            id="password"
-            v-model="password"
-            required
-          />
-        </div>
-        <div class="form-input">
-          <label class="input-field-label">Confirm password</label>
-          <input
-            type="password"
-            class="input-field"
-            placeholder="**********"
-            id="confirmPassword"
-            v-model="confirmPassword"
-            required
-          />
-        </div>
-        <button class="button" type="submit">Sign Up</button>
-        <p>
-          Have an account?
-          <PersonalRouter
-            :route="route"
-            :buttonText="buttonText"
-            class="sign-up-link"
-          />
-        </p>
-      </div>
-    </form> -->
-
-
-
 </template>
 
 <script setup>
@@ -140,6 +87,9 @@ import { supabase } from "../supabase";
 import { useRouter } from "vue-router";
 import { useUserStore } from "../stores/user";
 import { storeToRefs } from "pinia";
+
+import Swal from 'sweetalert2'
+
 
 // Route Variables
 const route = "/auth/login";
@@ -163,6 +113,7 @@ const signUp = async () => {
       // calls the user store and send the users info to backend to logIn
       await useUserStore().signUp(email.value, password.value);
       // redirects user to the homeView
+      Swal.fire('Revisa tu e-mail','','success')
       redirect.push({ path: "/auth/login" });
     } catch (error) {
       // displays error message
@@ -175,7 +126,8 @@ const signUp = async () => {
     return;
   }
   errorMsg.value = "error password";
-  alert("Las dos contraseñas no coinciden");
+  // alert("Las dos contraseñas no coinciden");
+  Swal.fire('Contraseñas no coinciden','','error')
 
 };
 

@@ -1,7 +1,9 @@
 <script setup>
 import PersonalRouter from "./PersonalRouter.vue";
+import { supabase } from '../supabase'
+
 import { useUserStore } from "../stores/user";
-import { computed } from "vue";
+import { computed, watch } from 'vue';
 import { useRouter } from "vue-router";
 import { ref, onMounted} from 'vue';
 import Avatar from '../components/Avatar.vue';
@@ -9,27 +11,31 @@ import Avatar from '../components/Avatar.vue';
 
  const user = useUserStore();
 
+ 
+const username = ref("");
+const avatar_url = computed (() =>{
+  if(user.profile) return useUserStore().profile.avatar_url
+});
+
+const src = ref('')
+
+
 // constant to save a variable that will get the user from store with a computed function imported from vue
 const getUser = computed(() => {
   if(user.profile) return useUserStore().profile.username});
-
-const getAvatar = computed(() => {
-  if(user.profile) return useUserStore().profile.avatar_url});
-
-
-// constant that calls user email from the useUSerStore
-
-const username = ref("");
-const avatar_url = ref ("")
+ 
+ watch(
+  avatar_url, () =>{
+  if(user.profile) return downloadImage()}
+  
+);
 
 
 const setup = async () => {
   await user.fetchUser();
   username.value = user.profile.username;
-  avatar_url.value = user.profile.avatar_url;
-  // console.log(avatar_url.value);
+  // avatar_url.value = user.profile.avatar_url;
 }
-
 setup();
 
 
@@ -39,8 +45,6 @@ const redirect = useRouter();
 const signOut = async () => {
   console.log("estoy aqui");
   try{
-    // call the user store and send the users info to backend to signOut
-    // then redirect user to the homeView
     await user.signOut();
     await redirect.push({ path: '/auth/login' });
 
@@ -58,6 +62,21 @@ window.addEventListener("resize",() => {
     }
 })
 
+const downloadImage = async () => {
+//   console.log("Estoy dimg");  
+  try {
+        const { data, error } = await supabase.storage
+            .from('avatars')
+            .download(avatar_url.value)
+        if (error) throw error
+        src.value = URL.createObjectURL(data)
+      
+    } catch (error) {
+        console.error('Error downloading image: ', error.message)
+    }
+
+}
+downloadImage()
 
 const props = defineProps({
     user: Object
@@ -107,22 +126,28 @@ onMounted(() => {
 
       <!-- Nav Bar mobile extended -->
           <nav :class="isOpen? 'block' : 'hidden '" class="flex justify-end  p-5 w-full  ">
-            
+            <!-- IMAGE AVATAR -->
+            <img :src="src" class="block mr-4 mx-auto p-1 w-10 h-10 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" alt="Avatar" />
+           <!-- LABEL USER NAME -->
             <h1 class=" text-white hover:text-blue-800 font-medium mr-10"> Welcome, {{getUser}}</h1>
-            
+            <!-- Home -->
             <router-link to="/" class=" block mr-4 text-white font-semibold rounded hover:bg-gray-800">
-              <!-- Home -->
               <font-awesome-icon icon="fa-solid fa-house" />
             </router-link>
           
+            <!-- Account -->
             <router-link to="/account" class="block mr-4 text-white font-semibold rounded hover:bg-gray-800">
-              <!-- Account -->
               <font-awesome-icon icon="fa-solid fa-user-pen" />
             </router-link>
-            <button aria-label="Sign out" @click="signOut" type="button" class="block mr-4 text-white font-semibold rounded hover:bg-blue-400">
+
+            <router-link to=""  @click="signOut" class="block mr-4 text-white font-semibold rounded hover:bg-gray-800">
               <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
-            </button>
-          
+
+            </router-link>
+            <!-- <button aria-label="Sign out" @click="signOut" type="button" class="block mr-4 text-white font-semibold rounded hover:bg-blue-400">
+              <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
+            </button> -->
+
           </nav>
           </header>
 </template>
